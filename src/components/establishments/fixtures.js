@@ -13,5 +13,15 @@ export const establishments = [
         id          : "MJLMH0389",
         name        : "Batonier",
         description : "Un super bar de fin de soirée"
-    }
+    },
+    {
+        id          : "MJLMH0389",
+        name        : "The Place to Be",
+        description : "Un lieu a connaitre"
+    },
+    {
+        id          : "MJLMH0389",
+        name        : "Le Capitaine",
+        description : "Un petit bar en bord de Meuse"
+    },
 ]

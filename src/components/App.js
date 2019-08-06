@@ -8,10 +8,19 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { pseudo : "inconnu" }
+        this.state = { 
+            pseudo : "inconnu",
+            searchStringUser: "",
     }
+    this.handleChange = this.handleChange.bind(this);
+}
 
-    randomPseudo = () => {
+handleChange(e){
+
+    this.setState({searchStringUser: e.target.value});// recupére l'input et le place dans le state
+}
+    
+randomPseudo = () => {
 
         let randomPseudo    = ""
         const possible      = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -25,10 +34,17 @@ class App extends Component {
         })
     }
   
-    render() {
+render() {
 
-      const listEstablishment = establishments.map( (establishment) => {
-            return (
+    const establishmentFilter = establishments.filter((searchText) => {
+        let search = searchText.name + " " + searchText.description;
+        return search.toLowerCase().match(this.state.searchStringUser);
+    });
+
+    
+
+    const listEstablishment = establishmentFilter.map( (establishment) => {
+        return (
               // L'attribut "key" permet à React d'identifier les éléments.
               // Cela améliore les performances lors de l'ajout,
               // la modification et la suppression d'un élément.
@@ -46,6 +62,15 @@ class App extends Component {
                     </div>
                     <div className="App-intro">
                         <p> <a onClick={ this.randomPseudo } ><button>Next</button></a></p>
+                    <div>
+                       
+                        <input
+                            type="text"
+                            placeholder="search"
+                            value={this.state.searchStringUser}
+                            onChange={this.handleChange}
+                        />
+                    </div>
                         <section>
                         { listEstablishment }
                         </section>
